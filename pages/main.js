@@ -60,13 +60,15 @@ module.exports = {
   },
   async goHome() { 
     I.click(this.homeButton.home);
+    I.waitForElement(this.productIphone.iphone, 5);
   },
   async goNext() { 
     I.click(this.nextPageButton.next);
+    I.waitForElement(this.previousPageButton.previous, 5);
   },
   async goCart() { 
     I.click(this.Cart.cart);
-    
+    I.waitForElement(this.placeOrder.place, 5);
   },
 
   // insert your locators and methods here
