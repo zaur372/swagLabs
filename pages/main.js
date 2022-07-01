@@ -41,6 +41,9 @@ module.exports = {
   Total:{
     total : '#totalp',
   },
+  Mac:{
+    mac : '[href="prod.html?idp_=11"]',
+  },
   async login (username, password) {
     I.click(this.authButton.login);
     I.click(this.fields.username);
@@ -68,7 +71,11 @@ module.exports = {
   },
   async goCart() { 
     I.click(this.Cart.cart);
-    I.waitForElement(this.placeOrder.place, 5);
+    I.waitForElement(this.Total.total, 5);
+  },
+  async goHomePrev() { 
+    const text = await I.grabTextFrom(this.previousPageButton.previous);
+    return text;
   },
 
   // insert your locators and methods here

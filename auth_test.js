@@ -11,17 +11,23 @@ Scenario('Авторизоваться демо пользователем', asy
 Scenario('Проверить переход на домашнюю страницу', async({ I, mainPage }) => {
     await mainPage.goProduct();
     await mainPage.goHome();
+    const home = await mainPage.goHomePrev();
+    assert.deepStrictEqual(home, 'Previous', 'Переход на домашнюю страницу не выполнен');
 });
 Scenario('Проверить переход на следующую страницу товаров', async({ I, mainPage }) => {
     await mainPage.goNext();
+    const macBook = await mainPage.goHomePrev();
+    assert.deepStrictEqual(macBook, 'Previous', 'Переход на следующую страницу не выполнен');
 });
-Scenario('Просмотреть корзину', async({ I, mainPage }) => {
+Scenario('Просмотреть корзину', async({ I, mainPage, cartPage }) => {
     await mainPage.goCart();
+    const placeOrderText = await cartPage.getPlaceOrder();
+    assert.deepStrictEqual(placeOrderText, 'Place Order', 'Переход на вкладку корзина не выполнен');
 });
 Scenario('Добавить товар в корзину', async({ I, mainPage, productPage, cartPage }) => {
     await mainPage.goProduct()
     await productPage.goAdd();
     await mainPage.goCart()
-    const total = await cartPage.getTotal();
-    assert.deepStrictEqual(total, '790', 'Цена телефона не равна 790');
+    const placeOrderText = await cartPage.getPlaceOrder();
+    assert.deepStrictEqual(placeOrderText, 'Place Order', 'Переход на вкладку корзина не выполнен'); 
 });
